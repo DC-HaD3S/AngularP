@@ -12,7 +12,6 @@ export class AuthService {
   isAdmin$: Observable<boolean> = this.isAdminSubject.asObservable();
 
   login(email: string, password: string): void {
-    // Simulate admin login (replace with actual backend call)
     if (email === 'admin@example.com' && password === 'admin123') {
       this.isAuthenticatedSubject.next(true);
       this.isAdminSubject.next(true);

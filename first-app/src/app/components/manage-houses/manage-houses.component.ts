@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./manage-houses.component.css']
 })
 export class ManageHousesComponent {
-  // Placeholder for future CRUD functionality
 }
