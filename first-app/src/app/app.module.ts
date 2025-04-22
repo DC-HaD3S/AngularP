@@ -2,21 +2,37 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import routeConfig from './routes'; // your route config
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import routeConfig from './routes';
+import { HomeComponent } from './components/home/home.component';
+import { DetailsComponent } from './components/details/details.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { ManageHousesComponent } from './components/manage-houses/manage-houses.component';
+import { HousingLocationComponent } from './components/housing-location/housing-location.component';
 
 @NgModule({
-  declarations: [AppComponent, AboutComponent, ContactComponent, PrivacyPolicyComponent, TermsAndConditionsComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    DetailsComponent,
+    AboutComponent,
+    ContactComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent,
+    ManageHousesComponent,
+    HousingLocationComponent
+  ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routeConfig),
     SharedModule,
-    RouterModule.forRoot(routeConfig)  // root configurations
+    CoreModule
   ],
-  providers: [],
+  providers: [], // Removed AuthService, AuthGuard (provided by CoreModule or root)
   bootstrap: [AppComponent]
 })
 export class AppModule {}

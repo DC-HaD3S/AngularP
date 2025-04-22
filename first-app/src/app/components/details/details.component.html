@@ -1,30 +1,70 @@
 <article>
-    <img class="listing-photo" [src]="housingLocation?.photo"
-      alt="Exterior photo of {{housingLocation?.name}}"/>
-    <section class="listing-description">
-      <h2 class="listing-heading">{{housingLocation?.name}}</h2>
-      <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
-    </section>
-    <section class="listing-features">
-      <h2 class="section-heading">About this housing location</h2>
-      <ul>
-        <li>Units available: {{housingLocation?.availableUnits}}</li>
-        <li>Does this location have wifi: {{housingLocation?.wifi}}</li>
-        <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
-      </ul>
-    </section>
-    <section class="listing-apply">
-      <h2 class="section-heading">Apply now to live here</h2>
-      <form [formGroup]="applyForm" (submit)="submitApplication()">
-        <label for="first-name">First Name</label>
-        <input id="first-name" type="text" formControlName="firstName">
+  <img class="listing-photo" [src]="housingLocation?.photo"
+    alt="Exterior photo of {{housingLocation?.name}}"/>
+  <section class="listing-description">
+    <h2 class="listing-heading">{{housingLocation?.name}}</h2>
+    <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
+  </section>
+  <section class="listing-features">
+    <h2 class="section-heading">About this housing location</h2>
+    <ul>
+      <li>Units available: {{housingLocation?.availableUnits}}</li>
+      <li>Does this location have wifi: {{housingLocation?.wifi}}</li>
+      <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
+    </ul>
+  </section>
+  <section class="listing-apply">
+    <h2 class="section-heading">Apply now to live here</h2>
+    <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
+      <label for="first-name">First Name</label>
+      <input id="first-name" type="text" formControlName="firstName">
+      <div *ngIf="applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched" class="error">
+        First name is required and must be at least 2 characters.
+      </div>
 
-        <label for="last-name">Last Name</label>
-        <input id="last-name" type="text" formControlName="lastName">
+      <label for="last-name">Last Name</label>
+      <input id="last-name" type="text" formControlName="lastName">
+      <div *ngIf="applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched" class="error">
+        Last name is required and must be at least 2 characters.
+      </div>
 
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email">
-        <button type="submit" class="primary">Apply now</button>
-      </form>
-    </section>
-  </article>
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email">
+      <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="error">
+        Valid email is required.
+      </div>
+
+      <label for="phone">Phone Number</label>
+      <input id="phone" type="tel" formControlName="phone">
+      <div *ngIf="applyForm.get('phone')?.invalid && applyForm.get('phone')?.touched" class="error">
+        Valid 10-digit phone number is required.
+      </div>
+
+      <label for="address">Current Address</label>
+      <input id="address" type="text" formControlName="address">
+      <div *ngIf="applyForm.get('address')?.invalid && applyForm.get('address')?.touched" class="error">
+        Address is required and must be at least 5 characters.
+      </div>
+
+      <label for="occupation">Occupation</label>
+      <input id="occupation" type="text" formControlName="occupation">
+      <div *ngIf="applyForm.get('occupation')?.invalid && applyForm.get('occupation')?.touched" class="error">
+        Occupation is required and must be at least 2 characters.
+      </div>
+
+      <label for="monthly-income">Monthly Income (₹)</label>
+      <input id="monthly-income" type="number" formControlName="monthlyIncome">
+      <div *ngIf="applyForm.get('monthlyIncome')?.invalid && applyForm.get('monthlyIncome')?.touched" class="error">
+        Valid monthly income is required.
+      </div>
+
+      <label for="move-in-date">Preferred Move-in Date</label>
+      <input id="move-in-date" type="date" formControlName="moveInDate">
+      <div *ngIf="applyForm.get('moveInDate')?.invalid && applyForm.get('moveInDate')?.touched" class="error">
+        Move-in date is required.
+      </div>
+
+      <button type="submit" class="primary" [disabled]="applyForm.invalid">Apply now</button>
+    </form>
+  </section>
+</article>

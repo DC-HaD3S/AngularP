@@ -5,6 +5,8 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { ManageHousesComponent } from './components/manage-houses/manage-houses.component';
+import { AuthGuard } from './core/auth.guard';
 
 const routeConfig: Routes = [
   {
@@ -15,7 +17,7 @@ const routeConfig: Routes = [
   {
     path: 'details/:id',
     component: DetailsComponent,
-    title: 'Home details`'
+    title: 'Home details'
   },
   {
     path: 'about',
@@ -27,9 +29,22 @@ const routeConfig: Routes = [
     component: ContactComponent,
     title: 'Contact Us'
   },
-  { path: 'privacy-policy', component: PrivacyPolicyComponent, title: 'Privacy Policy' },
-  { path: 'terms-and-conditions', component: TermsAndConditionsComponent, title: 'Terms & Conditions' }
+  { 
+    path: 'privacy-policy', 
+    component: PrivacyPolicyComponent, 
+    title: 'Privacy Policy' 
+  },
+  { 
+    path: 'terms-and-conditions', 
+    component: TermsAndConditionsComponent, 
+    title: 'Terms & Conditions' 
+  },
+  { 
+    path: 'manage-houses', 
+    component: ManageHousesComponent, 
+    title: 'Manage Houses', 
+    canActivate: [AuthGuard] 
+  }
 ];
-
 
 export default routeConfig;

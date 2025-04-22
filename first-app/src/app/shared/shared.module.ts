@@ -1,18 +1,11 @@
-// src/app/shared/shared.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-
-// Components
+import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-
-// Directives
-import { HighlightDirective } from './directives/highlight.directive';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
-
-// Pipes
+import { HighlightDirective } from './directives/highlight.directive';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
@@ -20,24 +13,26 @@ import { TruncatePipe } from './pipes/truncate.pipe';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    HighlightDirective,
     ClickOutsideDirective,
+    HighlightDirective,
     CapitalizePipe,
     TruncatePipe
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
     HeaderComponent,
     FooterComponent,
-    HighlightDirective,
     ClickOutsideDirective,
+    HighlightDirective,
     CapitalizePipe,
-    TruncatePipe,
-    RouterModule,
-    CommonModule
+    TruncatePipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {}
