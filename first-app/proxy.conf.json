@@ -1,0 +1,8 @@
+{
+    "/postoffice": {
+      "target": "https://api.postalpincode.in",
+      "secure": false,
+      "pathRewrite": { "^/postoffice": "" },
+      "changeOrigin": true
+    }
+  }

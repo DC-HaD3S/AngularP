@@ -13,6 +13,13 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ManageHousesComponent } from './components/manage-houses/manage-houses.component';
 import { HousingLocationComponent } from './components/housing-location/housing-location.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,11 +35,19 @@ import { HousingLocationComponent } from './components/housing-location/housing-
   ],
   imports: [
     BrowserModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    HttpClientModule,
+
+    MatFormFieldModule,
+    MatSelectModule,
     RouterModule.forRoot(routeConfig),
     SharedModule,
-    CoreModule
+    CoreModule,
+    BrowserAnimationsModule
   ],
-  providers: [], // Removed AuthService, AuthGuard (provided by CoreModule or root)
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

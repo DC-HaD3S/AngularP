@@ -1,6 +1,5 @@
 <article>
-  <img class="listing-photo" [src]="housingLocation?.photo"
-    alt="Exterior photo of {{housingLocation?.name}}"/>
+  <img class="listing-photo" [src]="housingLocation?.photo" alt="Exterior photo of {{housingLocation?.name}}"/>
   <section class="listing-description">
     <h2 class="listing-heading">{{housingLocation?.name}}</h2>
     <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
@@ -46,10 +45,37 @@
         Address is required and must be at least 5 characters.
       </div>
 
+      <label for="city">City</label>
+      <input id="city" type="text" formControlName="city" (input)="onCityChange()">
+      <div *ngIf="applyForm.get('city')?.invalid && applyForm.get('city')?.touched" class="error">
+        City is required and must be at least 2 characters.
+      </div>
+
+      <label for="pincode">Pincode</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Select Pincode</mat-label>
+        <mat-select id="pincode" formControlName="pincode">
+          <mat-option *ngFor="let pincode of pincodes" [value]="pincode">
+            {{ pincode }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="applyForm.get('pincode')?.invalid && applyForm.get('pincode')?.touched" class="error">
+        Pincode is required.
+      </div>
+
       <label for="occupation">Occupation</label>
-      <input id="occupation" type="text" formControlName="occupation">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Occupation</mat-label>
+        <mat-select id="occupation" formControlName="occupation">
+          <mat-option value="Employed">Employed</mat-option>
+          <mat-option value="Self-Employed">Self-Employed</mat-option>
+          <mat-option value="Student">Student</mat-option>
+          <mat-option value="Retired">Retired</mat-option>
+        </mat-select>
+      </mat-form-field>
       <div *ngIf="applyForm.get('occupation')?.invalid && applyForm.get('occupation')?.touched" class="error">
-        Occupation is required and must be at least 2 characters.
+        Occupation is required.
       </div>
 
       <label for="monthly-income">Monthly Income (₹)</label>
@@ -59,7 +85,11 @@
       </div>
 
       <label for="move-in-date">Preferred Move-in Date</label>
-      <input id="move-in-date" type="date" formControlName="moveInDate">
+      <mat-form-field appearance="fill">
+        <input matInput id="move-in-date" formControlName="moveInDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       <div *ngIf="applyForm.get('moveInDate')?.invalid && applyForm.get('moveInDate')?.touched" class="error">
         Move-in date is required.
       </div>

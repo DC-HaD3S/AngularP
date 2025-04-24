@@ -6,8 +6,7 @@ import { HousingLocation } from '../../interface/housinglocation';
 })
 export class HousingService {
 
-  url = 'http://localhost:8000/locations';
-  applicationUrl = 'http://localhost:8000/application';
+  url = 'http://localhost:8000/locations'; 
 
   async getAllHousingLocations(): Promise<HousingLocation[]> {
     const data = await fetch(this.url);
@@ -25,42 +24,32 @@ export class HousingService {
     email: string,
     phone: string,
     address: string,
+    city: string, 
     occupation: string,
     monthlyIncome: string,
-    moveInDate: string
+    moveInDate: string,
+    pincode: string
   ): Promise<void> {
     try {
-      const response = await fetch(this.applicationUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          address,
-          occupation,
-          monthlyIncome,
-          moveInDate
-        })
-      });
-      if (!response.ok) {
-        throw new Error('Failed to submit application');
-      }
-      console.log('Application submitted successfully:', {
+      const applications = JSON.parse(localStorage.getItem('applications') || '[]');
+      const newApplication = {
         firstName,
         lastName,
         email,
         phone,
         address,
+        city,
         occupation,
         monthlyIncome,
-        moveInDate
-      });
+        moveInDate,
+        pincode
+      };
+      applications.push(newApplication);
+      localStorage.setItem('applications', JSON.stringify(applications));
+
+      console.log('Application saved to localStorage:', newApplication);
     } catch (error) {
-      console.error('Error submitting application:', error);
+      console.error('Error saving application to localStorage:', error);
     }
   }
 }

@@ -6,6 +6,14 @@
   float: right;
 }
 
+
+
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
 .listing-heading {
   font-size: 48pt;
   font-weight: bold;
@@ -14,6 +22,11 @@
 
 .listing-location::before {
   content: url('/assets/location-pin.svg') / '';
+}
+.mat-select-panel {
+  background-color: white;
+  /* tried making white dropdown */
+  border: none;
 }
 
 .listing-location {
