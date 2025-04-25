@@ -1,6 +1,16 @@
-<section class="listing">
-  <img class="listing-photo" [src]="housingLocation.photo" alt="Exterior photo of {{housingLocation.name}}">
-  <h2 class="listing-heading">{{ housingLocation.name }}</h2>
-  <p class="listing-location">{{ housingLocation.city}}, {{housingLocation.state }}</p>
-  <a [routerLink]="['/details', housingLocation.id]">Learn More</a>
-</section>
+<mat-card class="listing">
+  <img mat-card-image [src] ="housingLocation.photo" alt="Exterior photo of {{housingLocation.name}}">
+  
+  <mat-card-header>
+    <mat-card-title>{{ housingLocation.name }}</mat-card-title>
+    <mat-card-subtitle>{{ housingLocation.city }}, {{ housingLocation.state }}</mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-actions>
+    <a mat-button color="primary" [routerLink]="['/details', housingLocation.id]">Learn More</a>
+  </mat-card-actions>
+</mat-card>
+
+    <!-- use matcard -->
+   <!-- make this reusable for the user component, user will use same component from the json file -->
+    <!-- reusuable  -->

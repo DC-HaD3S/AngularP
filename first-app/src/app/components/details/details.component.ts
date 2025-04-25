@@ -1,10 +1,12 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../../core/service/housing.service';
 import { HousingLocation } from '../../interface/housinglocation';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../interface/api-response';
+import { debounceTime } from 'rxjs/operators';
+import { catchError, map, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -12,7 +14,7 @@ import { ApiResponse } from '../../interface/api-response';
   styleUrls: ['./details.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class DetailsComponent {
+export class DetailsComponent implements AfterViewInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
   fb = inject(FormBuilder);
@@ -48,7 +50,22 @@ export class DetailsComponent {
         console.error('DetailsComponent error:', error);
       }
     );
-    console.log('Form initialized:', this.applyForm.value); // for Debugging Log form state on initialization
+    console.log('Form initialized:', this.applyForm.value);
+  }
+
+  ngAfterViewInit() {
+    this.applyForm.get('city')?.valueChanges.pipe(
+      debounceTime(500)
+    ).subscribe(city => {
+      console.log('Debounced city value:', city);
+      if (city && city.length >= 2) {
+        this.fetchPincodes(city);
+      } else {
+        this.pincodes = [];
+        this.applyForm.get('pincode')?.setValue('');
+        console.log('City length < 2 or invalid, resetting pincodes');
+      }
+    });
   }
 
   submitApplication() {
@@ -71,57 +88,30 @@ export class DetailsComponent {
     }
   }
 
-  onCityChange() {
-    console.log('onCityChange called with city:', this.applyForm.get('city')?.value); //For Debugging, Log when method is called
-    const city = this.applyForm.get('city')?.value;
-    if (city && city.length >= 2) {
-      this.fetchPincodes(city);
-    } else {
-      this.pincodes = [];
-      this.applyForm.get('pincode')?.setValue('');
-      console.log('City length < 2 or invalid, resetting pincodes');
-    }
-  }
-
-  private fetchPincodes(city: string) {
+  private fetchPincodes(city: string): void {
     const normalizedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
-    console.log('Original city:', city);
-    console.log('Normalized city:', normalizedCity);
-    const apiUrl = `/postoffice/postoffice/${encodeURIComponent(normalizedCity)}`;
-    console.log('Fetching pincodes for URL:', apiUrl);
-    this.http.get<ApiResponse[]>(apiUrl).subscribe({
-      next: (response: ApiResponse[]) => {
-        console.log('Raw API Response:', JSON.stringify(response, null, 2));
-        if (response && response.length > 0) {
-          console.log('Response[0]:', response[0]);
-          console.log('Status:', response[0].Status);
-          console.log('PostOffice:', response[0].PostOffice);
-          if (response[0].Status === 'Success' && response[0].PostOffice && response[0].PostOffice.length > 0) {
-            this.pincodes = [...new Set(response[0].PostOffice.map(office => office.Pincode))];
-            console.log('Pincodes extracted:', this.pincodes);
-            if (this.pincodes.length > 0) {
-              this.applyForm.get('pincode')?.setValue(this.pincodes[0], { emitEvent: true });
-              console.log('Set pincode to:', this.pincodes[0]);
-            } else {
-              this.applyForm.get('pincode')?.setValue('');
-              console.log('PostOffice array is empty despite Success status');
-            }
-          } else {
-            this.pincodes = [];
-            this.applyForm.get('pincode')?.setValue('');
-            console.log('API status not Success or PostOffice is null/empty');
-          }
-        } else {
-          this.pincodes = [];
-          this.applyForm.get('pincode')?.setValue('');
-          console.log('Invalid or empty API response');
+    const apiUrl = `https://api.postalpincode.in/postoffice/${encodeURIComponent(normalizedCity)}`;
+
+    this.http.get<ApiResponse[]>(apiUrl).pipe(
+      map(response => {
+        if (!response || !Array.isArray(response) || response[0]?.Status === 'Error') {
+          throw new Error('Invalid API response or no data found');
         }
-      },
-      error: (error: HttpErrorResponse) => {
-        console.error('Error fetching pincodes:', error);
+        const postOffices = response[0].PostOffice || [];
+        return [...new Set(postOffices.map(office => office.Pincode))];
+      }),
+      tap(pincodes => {
+        this.pincodes = pincodes;
+        const pincodeControl = this.applyForm.get('pincode');
+        pincodeControl?.setValue(pincodes[0] || '', { emitEvent: true });
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('API Error:', error.message, error.status, error.url);
         this.pincodes = [];
         this.applyForm.get('pincode')?.setValue('');
-      }
-    });
+        this.errorMessage = `Failed to fetch pincodes for ${normalizedCity}. Status: ${error.status}. Check the city name or API availability.`;
+        return of([]);
+      })
+    ).subscribe();
   }
 }

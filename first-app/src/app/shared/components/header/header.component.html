@@ -10,7 +10,7 @@
     <ng-container *ngIf="isAuthenticated$ | async; else notLoggedIn">
       <span>Logged In</span>
       <button class="auth-button" (click)="logout()">Logout</button>
-      <button *ngIf="isAdmin$ | async" class="auth-button" routerLink="/manage-houses">Manage Houses</button>
+      <button *ngIf="isAuthenticated$ | async" class="auth-button" routerLink="/manage-houses">Manage Houses</button>
     </ng-container>
     <ng-template #notLoggedIn>
       <button class="auth-button" (click)="login()">Login</button>

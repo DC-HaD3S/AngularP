@@ -1,100 +1,122 @@
-<article>
-  <img class="listing-photo" [src]="housingLocation?.photo" alt="Exterior photo of {{housingLocation?.name}}"/>
-  <section class="listing-description">
-    <h2 class="listing-heading">{{housingLocation?.name}}</h2>
-    <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
-  </section>
-  <section class="listing-features">
+<mat-card id="house1" class="housing-card">
+  <img mat-card-image [src]="housingLocation?.photo" alt="Exterior photo of {{housingLocation?.name}}"/>
+  <mat-card-header>
+    <mat-card-title>{{housingLocation?.name}}</mat-card-title>
+    <mat-card-subtitle>{{housingLocation?.city}}, {{housingLocation?.state}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
     <h2 class="section-heading">About this housing location</h2>
-    <ul>
-      <li>Units available: {{housingLocation?.availableUnits}}</li>
-      <li>Does this location have wifi: {{housingLocation?.wifi}}</li>
-      <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
-    </ul>
-  </section>
-  <section class="listing-apply">
-    <h2 class="section-heading">Apply now to live here</h2>
+    <mat-list>
+      <mat-list-item>Units available: {{housingLocation?.availableUnits}}</mat-list-item>
+      <mat-list-item>Does this location have wifi: {{housingLocation?.wifi}}</mat-list-item>
+      <mat-list-item>Does this location have laundry: {{housingLocation?.laundry}}</mat-list-item>
+      <h2 class="section-heading">Apply now to live here</h2>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions style="justify-content: center;">
     <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
-      <label for="first-name">First Name</label>
-      <input id="first-name" type="text" formControlName="firstName">
-      <div *ngIf="applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched" class="error">
-        First name is required and must be at least 2 characters.
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>First Name</mat-label>
+          <input matInput id="first-name" formControlName="firstName">
+          <mat-error *ngIf="applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched">
+            First name is required and must be at least 2 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput id="last-name" formControlName="lastName">
+          <mat-error *ngIf="applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched">
+            Last name is required and must be at least 2 characters.
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <label for="last-name">Last Name</label>
-      <input id="last-name" type="text" formControlName="lastName">
-      <div *ngIf="applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched" class="error">
-        Last name is required and must be at least 2 characters.
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" type="email" formControlName="email">
+          <mat-error *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched">
+            Valid email is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Phone Number</mat-label>
+          <input matInput id="phone" type="tel" formControlName="phone">
+          <mat-error *ngIf="applyForm.get('phone')?.invalid && applyForm.get('phone')?.touched">
+            Valid 10-digit phone number is required.
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email">
-      <div *ngIf="applyForm.get('email')?.invalid && applyForm.get('email')?.touched" class="error">
-        Valid email is required.
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Current Address</mat-label>
+          <input matInput id="address" formControlName="address">
+          <mat-error *ngIf="applyForm.get('address')?.invalid && applyForm.get('address')?.touched">
+            Address is required and must be at least 5 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>City</mat-label>
+          <input matInput id="city" formControlName="city">
+          <mat-error *ngIf="applyForm.get('city')?.invalid && applyForm.get('city')?.touched">
+            City is required and must be at least 2 characters.
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <label for="phone">Phone Number</label>
-      <input id="phone" type="tel" formControlName="phone">
-      <div *ngIf="applyForm.get('phone')?.invalid && applyForm.get('phone')?.touched" class="error">
-        Valid 10-digit phone number is required.
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Select Pincode</mat-label>
+          <mat-select id="pincode" formControlName="pincode">
+            <mat-option *ngFor="let pincode of pincodes" [value]="pincode">
+              {{ pincode }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="applyForm.get('pincode')?.invalid && applyForm.get('pincode')?.touched">
+            Pincode is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Select Occupation</mat-label>
+          <mat-select id="occupation" formControlName="occupation">
+            <mat-option value="Employed">Employed</mat-option>
+            <mat-option value="Self-Employed">Self-Employed</mat-option>
+            <mat-option value="Student">Student</mat-option>
+            <mat-option value="Retired">Retired</mat-option>
+          </mat-select>
+          <mat-error *ngIf="applyForm.get('occupation')?.invalid && applyForm.get('occupation')?.touched">
+            Occupation is required.
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <label for="address">Current Address</label>
-      <input id="address" type="text" formControlName="address">
-      <div *ngIf="applyForm.get('address')?.invalid && applyForm.get('address')?.touched" class="error">
-        Address is required and must be at least 5 characters.
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Monthly Income (₹)</mat-label>
+          <input matInput id="monthly-income" type="number" formControlName="monthlyIncome">
+          <mat-error *ngIf="applyForm.get('monthlyIncome')?.invalid && applyForm.get('monthlyIncome')?.touched">
+            Valid monthly income is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Preferred Move-in Date</mat-label>
+          <input matInput id="move-in-date" formControlName="moveInDate" [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="applyForm.get('moveInDate')?.invalid && applyForm.get('moveInDate')?.touched">
+            Move-in date is required.
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <label for="city">City</label>
-      <input id="city" type="text" formControlName="city" (input)="onCityChange()">
-      <div *ngIf="applyForm.get('city')?.invalid && applyForm.get('city')?.touched" class="error">
-        City is required and must be at least 2 characters.
-      </div>
-
-      <label for="pincode">Pincode</label>
-      <mat-form-field appearance="fill">
-        <mat-label>Select Pincode</mat-label>
-        <mat-select id="pincode" formControlName="pincode">
-          <mat-option *ngFor="let pincode of pincodes" [value]="pincode">
-            {{ pincode }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div *ngIf="applyForm.get('pincode')?.invalid && applyForm.get('pincode')?.touched" class="error">
-        Pincode is required.
-      </div>
-
-      <label for="occupation">Occupation</label>
-      <mat-form-field appearance="fill">
-        <mat-label>Select Occupation</mat-label>
-        <mat-select id="occupation" formControlName="occupation">
-          <mat-option value="Employed">Employed</mat-option>
-          <mat-option value="Self-Employed">Self-Employed</mat-option>
-          <mat-option value="Student">Student</mat-option>
-          <mat-option value="Retired">Retired</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div *ngIf="applyForm.get('occupation')?.invalid && applyForm.get('occupation')?.touched" class="error">
-        Occupation is required.
-      </div>
-
-      <label for="monthly-income">Monthly Income (₹)</label>
-      <input id="monthly-income" type="number" formControlName="monthlyIncome">
-      <div *ngIf="applyForm.get('monthlyIncome')?.invalid && applyForm.get('monthlyIncome')?.touched" class="error">
-        Valid monthly income is required.
-      </div>
-
-      <label for="move-in-date">Preferred Move-in Date</label>
-      <mat-form-field appearance="fill">
-        <input matInput id="move-in-date" formControlName="moveInDate" [matDatepicker]="picker">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <div *ngIf="applyForm.get('moveInDate')?.invalid && applyForm.get('moveInDate')?.touched" class="error">
-        Move-in date is required.
-      </div>
-
-      <button type="submit" class="primary" [disabled]="applyForm.invalid">Apply now</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="applyForm.invalid">Apply now</button>
     </form>
-  </section>
-</article>
+  </mat-card-actions>
+</mat-card>

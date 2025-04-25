@@ -13,7 +13,6 @@ export class HeaderComponent {
   authService = inject(AuthService);
   router = inject(Router);
   isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
-  isAdmin$: Observable<boolean> = this.authService.isAdmin$;
 
   login(): void {
     this.authService.login('admin@example.com', 'admin123');

@@ -1,84 +1,44 @@
-.listing-photo {
-  height: 600px;
-  width: 50%;
+.housing-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+#house1{
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0 ,0.5);  
+}
+.housing-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: #333;
+}
+
+mat-card-image {
+  height: 300px;
   object-fit: cover;
-  border-radius: 30px;
-  float: right;
 }
 
-
-
-
-.error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.2rem;
-}
-.listing-heading {
-  font-size: 48pt;
-  font-weight: bold;
-  margin-bottom: 15px;
+.form-row {
+  display: flex;
+  gap: 2rem; /* Space between fields */
+  margin-bottom: 1rem;
 }
 
-.listing-location::before {
-  content: url('/assets/location-pin.svg') / '';
-}
-.mat-select-panel {
-  background-color: white;
-  /* tried making white dropdown */
-  border: none;
+.form-field {
+  flex: 1; /* Each field takes equal space */
+  min-width: 0; /* Prevents overflow */
 }
 
-.listing-location {
-  font-size: 24pt;
-  margin-bottom: 15px;
+mat-error {
+  color: #f44336;
 }
 
-.listing-features > .section-heading {
-  color: var(--secondary-color);
-  font-size: 24pt;
-  margin-bottom: 15px;
-}
-
-.listing-features {
-  margin-bottom: 20px;
-}
-
-.listing-features li {
-  font-size: 14pt;
-}
-
-li {
-  list-style-type: none;
-}
-
-.listing-apply .section-heading {
-  font-size: 18pt;
-  margin-bottom: 15px;
-}
-
-label, input {
-  display: block;
-}
-label {
-  color: var(--secondary-color);
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 12pt;
-}
-input {
-  font-size: 16pt;
-  margin-bottom: 15px;
-  padding: 10px;
-  width: 400px;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: solid .3px;
-}
-@media (max-width: 1024px) {
-  .listing-photo {
-    width: 100%;
-    height: 400px;
-  }
+button {
+  margin-top: 1rem;
+  width: 100%; /* Full width for the button */
 }

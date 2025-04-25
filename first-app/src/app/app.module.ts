@@ -20,6 +20,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card'; 
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    MatCardModule,
+    MatListModule,
+    MatButtonModule,
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
