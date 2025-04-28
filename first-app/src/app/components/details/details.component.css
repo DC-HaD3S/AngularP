@@ -36,14 +36,3 @@ mat-card-image {
 mat-error {
   color: #f44336;
 }
-.success-message {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}

@@ -12,13 +12,11 @@
   margin: 10px;
 }
 
+h2 {
+  text-align: center;
+  margin: 20px 0;
+}
+
 section {
   margin: 20px;
 }
-
-
-form {
-  display: flex;
-  gap: 10px;
-  margin-left: 20px;
-  }

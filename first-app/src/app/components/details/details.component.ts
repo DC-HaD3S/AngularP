@@ -21,7 +21,7 @@ export class DetailsComponent implements AfterViewInit {
   private http = inject(HttpClient);
   housingLocation: HousingLocation | undefined;
   errorMessage: string | null = null;
-  successMessage: string | null = null; // New property for success message
+  successMessage: string | null = null; 
   pincodes: string[] = [];
 
   applyForm: FormGroup = this.fb.group({

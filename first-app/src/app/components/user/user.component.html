@@ -1,0 +1,9 @@
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<h2>User Applications</h2>
+<div class="results">
+  <app-card
+    *ngFor="let application of applications"
+    [data]="application"
+    [cardConfig]="cardConfig">
+  </app-card>
+</div>

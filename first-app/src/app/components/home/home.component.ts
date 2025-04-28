@@ -14,6 +14,17 @@ export class HomeComponent {
   errorMessage: string | null = null;
   isLoading: boolean = false;
 
+  cardConfig = (id: string) => ({
+    fields: {
+      name: 'Name',
+      city: 'City'
+    },
+    titleField: 'name',
+    subtitleField: 'city',
+    imageField: 'photo',
+    button: { label: 'Learn More', link: ['/details', id] }
+  });
+
   constructor() {
     this.isLoading = true;
     this.housingService.getAllHousingLocations().then(
@@ -36,7 +47,7 @@ export class HomeComponent {
       return;
     }
     this.filteredLocationList = this.housingLocationList.filter(
-      housingLocation => housingLocation?.name.toLowerCase().includes(text.toLowerCase())
+      housingLocation => housingLocation?.city.toLowerCase().includes(text.toLowerCase())
     );
   }
 }

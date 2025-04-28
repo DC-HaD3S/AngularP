@@ -7,6 +7,7 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ManageHousesComponent } from './components/manage-houses/manage-houses.component';
 import { AuthGuard } from './core/auth.guard';
+import { UserComponent } from './components/user/user.component';
 
 const routeConfig: Routes = [
   {
@@ -14,6 +15,12 @@ const routeConfig: Routes = [
     component: HomeComponent,
     title: 'Home page'
   },
+  {
+    path: 'user',
+    component: UserComponent,
+    title: 'User page'
+  },
+
   {
     path: 'details/:id',
     component: DetailsComponent,

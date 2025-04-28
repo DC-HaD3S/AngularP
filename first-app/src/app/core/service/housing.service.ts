@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HousingLocation } from 'src/app/interface/housinglocation';
+import { Application } from 'src/app/interface/application';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -8,25 +9,23 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HousingService {
-  private apiUrl = 'http://localhost:8000'; // Adjust if your json-server runs on a different port
+  private apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
 
-  // Method to get all housing locations
   getAllHousingLocations(): Promise<HousingLocation[]> {
     return this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations`)
       .pipe(
-        map(locations => locations ?? []), // Ensure empty array if response is null/undefined
+        map(locations => locations ?? []),
         catchError((error: HttpErrorResponse) => {
           this.handleError(error);
-          return of([]); // Return empty array on error to maintain type consistency
+          return of([]);
         })
       )
       .toPromise()
-      .then(locations => locations ?? []); // Additional safeguard for Promise resolution
+      .then(locations => locations ?? []);
   }
 
-  // Existing method to get housing location by ID
   getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
     return this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations?id=${id}`)
       .pipe(
@@ -36,7 +35,6 @@ export class HousingService {
       .toPromise();
   }
 
-  // Existing method to submit application
   submitApplication(
     firstName: string,
     lastName: string,
@@ -72,7 +70,19 @@ export class HousingService {
       .toPromise();
   }
 
-  // Error handling
+  getAllApplications(): Promise<Application[]> {
+    return this.http.get<Application[]>(`${this.apiUrl}/applications`)
+      .pipe(
+        map(applications => applications ?? []),
+        catchError((error: HttpErrorResponse) => {
+          this.handleError(error);
+          return of([]);
+        })
+      )
+      .toPromise()
+      .then(applications => applications ?? []);
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Something went wrong; please try again later.'));
