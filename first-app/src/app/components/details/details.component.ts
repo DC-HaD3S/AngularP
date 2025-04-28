@@ -42,15 +42,14 @@ export class DetailsComponent implements AfterViewInit {
       housingLocation => {
         this.housingLocation = housingLocation;
         if (!housingLocation) {
-          this.errorMessage = `Housing location with ID ${housingLocationId} not found. Check json-server and db.json 'locations' endpoint.`;
+          this.errorMessage = `Housing location with ID ${housingLocationId} not found`;
         }
       },
       error => {
-        this.errorMessage = `Failed to load housing location (ID: ${housingLocationId}). Ensure json-server is running on port 8000 and db.json has the 'locations' endpoint.`;
+        this.errorMessage = `Failed to load housing location (ID: ${housingLocationId}). Ensure json-server is running`;
         console.error('DetailsComponent error:', error);
       }
     );
-    console.log('Form initialized:', this.applyForm.value);
   }
 
   ngAfterViewInit() {
@@ -83,19 +82,19 @@ export class DetailsComponent implements AfterViewInit {
         this.applyForm.value.pincode ?? ''
       ).then(
         () => this.applyForm.reset(),
-        error => this.errorMessage = 'Failed to submit application. Please try again.'
+        error => this.errorMessage = 'Please try again.'
       );
     }
   }
 
   private fetchPincodes(city: string): void {
-    const normalizedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
-    const apiUrl = `https://api.postalpincode.in/postoffice/${encodeURIComponent(normalizedCity)}`;
+    // const normalizedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+    const apiUrl = `https://api.postalpincode.in/postoffice/${encodeURIComponent(city)}`;
 
     this.http.get<ApiResponse[]>(apiUrl).pipe(
       map(response => {
         if (!response || !Array.isArray(response) || response[0]?.Status === 'Error') {
-          throw new Error('Invalid API response or no data found');
+          throw new Error('Invalid API response');
         }
         const postOffices = response[0].PostOffice || [];
         return [...new Set(postOffices.map(office => office.Pincode))];
@@ -109,7 +108,7 @@ export class DetailsComponent implements AfterViewInit {
         console.error('API Error:', error.message, error.status, error.url);
         this.pincodes = [];
         this.applyForm.get('pincode')?.setValue('');
-        this.errorMessage = `Failed to fetch pincodes for ${normalizedCity}. Status: ${error.status}. Check the city name or API availability.`;
+        this.errorMessage = `Failed to fetch pincodes for ${city}. `;
         return of([]);
       })
     ).subscribe();

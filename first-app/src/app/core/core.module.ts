@@ -1,8 +1,6 @@
-// src/app/core/core.module.ts
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Import your services
 import { HousingService } from './service/housing.service';
 
 @NgModule({

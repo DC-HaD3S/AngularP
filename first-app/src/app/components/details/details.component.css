@@ -13,7 +13,7 @@
 }
 
 .section-heading {
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 1rem 0;
   color: #333;
 }
@@ -25,20 +25,14 @@ mat-card-image {
 
 .form-row {
   display: flex;
-  gap: 2rem; /* Space between fields */
+  gap: 2rem; 
   margin-bottom: 1rem;
 }
 
 .form-field {
-  flex: 1; /* Each field takes equal space */
-  min-width: 0; /* Prevents overflow */
+  flex: 1; 
 }
 
 mat-error {
   color: #f44336;
-}
-
-button {
-  margin-top: 1rem;
-  width: 100%; /* Full width for the button */
 }
