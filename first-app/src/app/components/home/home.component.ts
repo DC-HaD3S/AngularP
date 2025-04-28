@@ -8,34 +8,35 @@ import { HousingLocation } from '../../interface/housinglocation';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  housingService = inject(HousingService);
+  housingService: HousingService = inject(HousingService);
   housingLocationList: HousingLocation[] = [];
   filteredLocationList: HousingLocation[] = [];
   errorMessage: string | null = null;
+  isLoading: boolean = false;
 
   constructor() {
+    this.isLoading = true;
     this.housingService.getAllHousingLocations().then(
-      (housingLocationList: HousingLocation[]) => {
-        this.housingLocationList = housingLocationList;
-        this.filteredLocationList = housingLocationList;
-        if (!housingLocationList.length) {
-          this.errorMessage = 'No housing locations found. Ensure json-server is running and db.json has the "locations" endpoint.';
-        }
+      (housingLocations: HousingLocation[]) => {
+        this.housingLocationList = housingLocations;
+        this.filteredLocationList = housingLocations;
+        this.isLoading = false;
       },
-      error => {
-        this.errorMessage = 'Failed to load housing locations. Ensure json-server is running on port 8000 and db.json has the "locations" endpoint.';
-        console.error('HomeComponent error:', error);
+      (error: Error) => {
+        this.errorMessage = 'Failed to load housing locations. Please try again.';
+        console.error('Failed to load housing locations:', error.message);
+        this.isLoading = false;
       }
     );
   }
 
-  filterResults(searchText: string) {
-    if (!searchText) {
+  filterResults(text: string) {
+    if (!text) {
       this.filteredLocationList = this.housingLocationList;
       return;
     }
-    this.filteredLocationList = this.housingLocationList.filter(location =>
-      location?.city?.toLowerCase().includes(searchText.toLowerCase())
+    this.filteredLocationList = this.housingLocationList.filter(
+      housingLocation => housingLocation?.name.toLowerCase().includes(text.toLowerCase())
     );
   }
 }

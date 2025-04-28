@@ -21,6 +21,7 @@ export class DetailsComponent implements AfterViewInit {
   private http = inject(HttpClient);
   housingLocation: HousingLocation | undefined;
   errorMessage: string | null = null;
+  successMessage: string | null = null; // New property for success message
   pincodes: string[] = [];
 
   applyForm: FormGroup = this.fb.group({
@@ -69,6 +70,8 @@ export class DetailsComponent implements AfterViewInit {
 
   submitApplication() {
     if (this.applyForm.valid) {
+      this.successMessage = null; // Clear previous success message
+      this.errorMessage = null; // Clear previous error message
       this.housingService.submitApplication(
         this.applyForm.value.firstName ?? '',
         this.applyForm.value.lastName ?? '',
@@ -79,16 +82,23 @@ export class DetailsComponent implements AfterViewInit {
         this.applyForm.value.occupation ?? '',
         this.applyForm.value.monthlyIncome ?? '',
         this.applyForm.value.moveInDate ?? '',
-        this.applyForm.value.pincode ?? ''
+        this.applyForm.value.pincode ?? '',
+        this.housingLocation?.id
       ).then(
-        () => this.applyForm.reset(),
-        error => this.errorMessage = 'Please try again.'
+        () => {
+          this.applyForm.reset();
+          this.pincodes = []; // Clear pincodes
+          this.successMessage = 'Successfully submitted application!'; // Set success message
+        },
+        error => {
+          this.errorMessage = 'Failed to submit application. Please try again.';
+          console.error('Submission error:', error);
+        }
       );
     }
   }
 
   private fetchPincodes(city: string): void {
-    // const normalizedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
     const apiUrl = `https://api.postalpincode.in/postoffice/${encodeURIComponent(city)}`;
 
     this.http.get<ApiResponse[]>(apiUrl).pipe(
@@ -112,5 +122,10 @@ export class DetailsComponent implements AfterViewInit {
         return of([]);
       })
     ).subscribe();
+  }
+
+  // Optional: Method to clear the success message
+  clearSuccessMessage() {
+    this.successMessage = null;
   }
 }

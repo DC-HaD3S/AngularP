@@ -117,6 +117,15 @@
       </div>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="applyForm.invalid">Apply now</button>
+      <!-- Display success message below the button -->
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+        <button mat-button color="primary" (click)="clearSuccessMessage()">Dismiss</button>
+      </div>
+      <!-- Display error message if needed -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </form>
   </mat-card-actions>
 </mat-card>

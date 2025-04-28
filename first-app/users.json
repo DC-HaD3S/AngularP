@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "name": "Mohsin",
+      "age": 30,
+      "gender": "Male",
+      "familyMembers": 3
+    },
+    {
+      "id": 2,
+      "name": "Payal",
+      "age": 25,
+      "gender": "Female",
+      "familyMembers": 2
+    },
+    {
+        "id": 3,
+        "name": "Gaurav",
+        "age": 25,
+        "gender": "Male",
+        "familyMembers": 2
+    },
+    {
+        "id": 4,
+        "name": "Prithvi",
+        "age": 21,
+        "gender": "Male",
+        "familyMembers": 4
+    }
+  ]
