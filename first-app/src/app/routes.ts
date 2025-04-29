@@ -8,12 +8,18 @@ import { TermsAndConditionsComponent } from './components/terms-and-conditions/t
 import { ManageHousesComponent } from './components/manage-houses/manage-houses.component';
 import { AuthGuard } from './core/auth.guard';
 import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routeConfig: Routes = [
   {
     path: '',
     component: HomeComponent,
     title: 'Home page'
+  },
+  {
+    path:'login',
+    component: LoginComponent,
+    title: 'Login Page'
   },
   {
     path: 'user',

@@ -1,21 +1,21 @@
 <mat-card class="card" *ngIf="data">
-    <img *ngIf="cardConfig.imageField && data[cardConfig.imageField]" mat-card-image [src]="data[cardConfig.imageField]" [alt]="cardConfig.fields[cardConfig.titleField] || 'Image'" />
+    <img *ngIf="cardConfig.imageField" mat-card-image [src]="data[cardConfig.imageField]"/>
     <mat-card-header>
       <mat-card-title>{{ cardConfig.formatTitle ? cardConfig.formatTitle(data) : data[cardConfig.titleField] }}</mat-card-title>
       <mat-card-subtitle>{{ data[cardConfig.subtitleField] }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="objectKeys(cardConfig.fields).length > 0">
+
       <mat-list>
         <ng-container *ngFor="let field of objectKeys(cardConfig.fields)">
-          <mat-list-item>
-            {{ cardConfig.fields[field] }}: 
-            <span *ngIf="field === 'monthlyIncome'">₹{{ data[field] | number }}</span>
-            <span *ngIf="field === 'email'" class="email-field">{{ data[field] }}</span>
-            <span *ngIf="field !== 'monthlyIncome' && field !== 'email'">{{ data[field] }}</span>
+          <mat-list-item >
+            <div>
+            {{ cardConfig.fields[field] }}:
+            <span>{{ data[field] }}</span>
+          </div>
           </mat-list-item>
         </ng-container>
       </mat-list>
-    </mat-card-content>
+    
     <mat-card-actions *ngIf="cardConfig.button">
       <a mat-button color="primary" [routerLink]="cardConfig.button.link">{{ cardConfig.button.label }}</a>
     </mat-card-actions>

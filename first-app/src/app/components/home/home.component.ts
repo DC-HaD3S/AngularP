@@ -12,13 +12,9 @@ export class HomeComponent {
   housingLocationList: HousingLocation[] = [];
   filteredLocationList: HousingLocation[] = [];
   errorMessage: string | null = null;
-  isLoading: boolean = false;
 
   cardConfig = (id: string) => ({
-    fields: {
-      name: 'Name',
-      city: 'City'
-    },
+    fields: {},
     titleField: 'name',
     subtitleField: 'city',
     imageField: 'photo',
@@ -26,17 +22,14 @@ export class HomeComponent {
   });
 
   constructor() {
-    this.isLoading = true;
     this.housingService.getAllHousingLocations().then(
       (housingLocations: HousingLocation[]) => {
         this.housingLocationList = housingLocations;
         this.filteredLocationList = housingLocations;
-        this.isLoading = false;
       },
       (error: Error) => {
         this.errorMessage = 'Failed to load housing locations. Please try again.';
         console.error('Failed to load housing locations:', error.message);
-        this.isLoading = false;
       }
     );
   }

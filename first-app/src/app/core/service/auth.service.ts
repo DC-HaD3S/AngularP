@@ -11,20 +11,35 @@ export class AuthService {
   private isAdminSubject = new BehaviorSubject<boolean>(false);
   isAdmin$: Observable<boolean> = this.isAdminSubject.asObservable();
 
-  login(email: string, password: string): void {
-    if (email === 'admin@example.com' && password === 'admin123') {
+  login(email: string, password: string): boolean {
+    if (email === 'admin@123.com' && password === 'admin123') {
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('isAdmin', 'true');
       this.isAuthenticatedSubject.next(true);
       this.isAdminSubject.next(true);
       console.log('Admin logged in');
+      return true;
+    }
+    else{
+      return false;
     }
   }
-
+  
+  autoLogin(): void {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  
+    this.isAuthenticatedSubject.next(isAuthenticated);
+    this.isAdminSubject.next(isAdmin);
+  }
+  
   logout(): void {
+    localStorage.clear();
     this.isAuthenticatedSubject.next(false);
     this.isAdminSubject.next(false);
     console.log('Logged out');
   }
-
+  
   isAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
   }

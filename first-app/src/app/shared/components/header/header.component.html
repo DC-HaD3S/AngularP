@@ -5,18 +5,24 @@
     <a routerLink="/contact">Contact</a>
     <a routerLink="/privacy-policy">Privacy Policy</a>
     <a routerLink="/terms-and-conditions">Terms & Conditions</a>
-    <a routerLink="/user">User</a>
-
-    
   </div>
+
   <div class="auth-section">
     <ng-container *ngIf="isAuthenticated$ | async; else notLoggedIn">
-      <span>Logged In</span>
+      <span class="status-text">Logged In</span>
+
+      <!-- Admin-only buttons -->
+      <ng-container *ngIf="authService.isAdmin$ | async">
+        <button class="auth-button" routerLink="/user">User Details</button>
+        <button class="auth-button" routerLink="/manage-houses">Manage Houses</button>
+      </ng-container>
+
       <button class="auth-button" (click)="logout()">Logout</button>
-      <button *ngIf="isAuthenticated$ | async" class="auth-button" routerLink="/manage-houses">Manage Houses</button>
     </ng-container>
     <ng-template #notLoggedIn>
-      <button class="auth-button" (click)="login()">Login</button>
+      <button class="auth-button" routerLink="/login">Login</button>
     </ng-template>
+    
+    
   </div>
 </nav>

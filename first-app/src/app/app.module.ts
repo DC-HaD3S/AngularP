@@ -26,6 +26,7 @@ import { TermsAndConditionsComponent } from './components/terms-and-conditions/t
 import { ManageHousesComponent } from './components/manage-houses/manage-houses.component';
 import { UserComponent } from './components/user/user.component';
 import { CardComponent } from './components/card/card.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CardComponent } from './components/card/card.component';
     TermsAndConditionsComponent,
     ManageHousesComponent,
     UserComponent,
-    CardComponent
+    CardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

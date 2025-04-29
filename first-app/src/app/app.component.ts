@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './core/service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'homes';
+  constructor(private authService: AuthService) {
+    this.authService.autoLogin(); // 🔁 Auto restore login state on reload
+  }
+
 }

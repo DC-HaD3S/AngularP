@@ -11,13 +11,11 @@ import { Application } from '../../interface/application';
 export class UserComponent implements OnInit {
   applications: Application[] = [];
   errorMessage: string | null = null;
-  isLoading: boolean = false;
 
   cardConfig = {
     fields: {
-      lastName: 'Last Name',
       email: 'Email',
-      monthlyIncome: 'Monthly Income'
+      occupation: 'Occupation'
     },
     titleField: 'firstName',
     subtitleField: 'city',
@@ -27,16 +25,13 @@ export class UserComponent implements OnInit {
   constructor(private router: Router, private housingService: HousingService) {}
 
   ngOnInit() {
-    this.isLoading = true;
     this.housingService.getAllApplications().then(
       (applications: Application[]) => {
         this.applications = applications;
-        this.isLoading = false;
       },
       (error: Error) => {
         this.errorMessage = 'Failed to load user applications. Please try again.';
         console.error('Failed to load applications:', error.message);
-        this.isLoading = false;
       }
     );
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HousingLocation } from 'src/app/interface/housinglocation';
 import { Application } from 'src/app/interface/application';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, firstValueFrom } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -13,29 +13,30 @@ export class HousingService {
 
   constructor(private http: HttpClient) {}
 
-  getAllHousingLocations(): Promise<HousingLocation[]> {
-    return this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations`)
-      .pipe(
-        map(locations => locations ?? []),
-        catchError((error: HttpErrorResponse) => {
-          this.handleError(error);
-          return of([]);
-        })
-      )
-      .toPromise()
-      .then(locations => locations ?? []);
+  async getAllHousingLocations(): Promise<HousingLocation[]> {
+    return firstValueFrom(
+      this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations`)
+        .pipe(
+          map(locations => locations ?? []),
+          catchError((error: HttpErrorResponse) => {
+            this.handleError(error);
+            return of([]);
+          })
+        )
+    );
   }
 
-  getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
-    return this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations?id=${id}`)
-      .pipe(
-        map(locations => locations[0]),
-        catchError(this.handleError)
-      )
-      .toPromise();
+  async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
+    return firstValueFrom(
+      this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations?id=${id}`)
+        .pipe(
+          map(locations => locations[0]),
+          catchError(this.handleError)
+        )
+    );
   }
 
-  submitApplication(
+  async submitApplication(
     firstName: string,
     lastName: string,
     email: string,
@@ -63,24 +64,25 @@ export class HousingService {
       createdAt: new Date().toISOString()
     };
 
-    return this.http.post<void>(`${this.apiUrl}/applications`, application)
-      .pipe(
-        catchError(this.handleError)
-      )
-      .toPromise();
+    await firstValueFrom(
+      this.http.post<void>(`${this.apiUrl}/applications`, application)
+        .pipe(
+          catchError(this.handleError)
+        )
+    );
   }
 
-  getAllApplications(): Promise<Application[]> {
-    return this.http.get<Application[]>(`${this.apiUrl}/applications`)
-      .pipe(
-        map(applications => applications ?? []),
-        catchError((error: HttpErrorResponse) => {
-          this.handleError(error);
-          return of([]);
-        })
-      )
-      .toPromise()
-      .then(applications => applications ?? []);
+  async getAllApplications(): Promise<Application[]> {
+    return firstValueFrom(
+      this.http.get<Application[]>(`${this.apiUrl}/applications`)
+        .pipe(
+          map(applications => applications ?? []),
+          catchError((error: HttpErrorResponse) => {
+            this.handleError(error);
+            return of([]);
+          })
+        )
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

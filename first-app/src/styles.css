@@ -7,7 +7,6 @@ body {
   font-family: 'Be Vietnam Pro', sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
   }
 :root {
   --primary-color: #605DC8;
@@ -29,6 +28,3 @@ button.primary {
   border-radius: 8px;
 }
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

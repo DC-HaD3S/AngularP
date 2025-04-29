@@ -2,12 +2,15 @@ mat-card.card {
     width: 300px;
     margin: 1rem;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    
   }
-  
+  mat-list-item{
+    margin-left: 10px;
+  }
   img {
     width: 300px;
     height: 300px;
@@ -33,7 +36,6 @@ mat-card.card {
   }
   
   mat-card-actions a {
-    padding: 0.5rem 1rem;
     background-color: #1976d2;
     color: #fff;
     border-radius: 10px 10px 10px 10px;
@@ -48,6 +50,7 @@ mat-card.card {
   mat-card.card mat-list {
     padding: 0 !important;
     margin: 0 !important;
+    
   }
   
   mat-card.card mat-list-item {
@@ -64,3 +67,5 @@ mat-card.card {
     word-break: break-all;
     overflow: visible;
   }
+ div{
+padding-left: 10px; }

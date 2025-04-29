@@ -131,6 +131,21 @@
       "pincode": "421002",
       "housingLocationId": "1",
       "createdAt": "2025-04-28T10:24:47.724Z"
+    },
+    {
+      "id": "ab9c",
+      "firstName": "Prithvi",
+      "lastName": "Goyel",
+      "email": "prithivi@gmail.com",
+      "phone": "4544545454",
+      "address": "Mumbai",
+      "city": "Mumbai",
+      "occupation": "Employed",
+      "monthlyIncome": 88488,
+      "moveInDate": "2025-05-06T18:30:00.000Z",
+      "pincode": "400099",
+      "housingLocationId": "2",
+      "createdAt": "2025-04-29T07:28:47.814Z"
     }
   ]
 }

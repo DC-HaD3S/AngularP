@@ -19,6 +19,10 @@ section {
 
 form {
   display: flex;
-  gap: 10px;
-  margin-left: 20px;
+  gap: 15px;
+  margin-left: 70px;
+  }
+  input{
+    width: 25%;
+    border-radius: 10px;
   }
