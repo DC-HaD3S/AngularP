@@ -27,6 +27,12 @@ import { ManageHousesComponent } from './components/manage-houses/manage-houses.
 import { UserComponent } from './components/user/user.component';
 import { CardComponent } from './components/card/card.component';
 import { LoginComponent } from './components/login/login.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +46,16 @@ import { LoginComponent } from './components/login/login.component';
     ManageHousesComponent,
     UserComponent,
     CardComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
+    MatTableModule,
+    MatDialogModule,
+    MaterialModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,

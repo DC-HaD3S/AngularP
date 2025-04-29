@@ -1,8 +1,7 @@
 <nav class="navbar">
-  <div class="nav-links">
+  <div class="nav-links" *ngIf="isAuthenticated$ | async">
     <a routerLink="/">Home</a>
     <a routerLink="/about">About</a>
-    <a routerLink="/contact">Contact</a>
     <a routerLink="/privacy-policy">Privacy Policy</a>
     <a routerLink="/terms-and-conditions">Terms & Conditions</a>
   </div>
@@ -11,7 +10,6 @@
     <ng-container *ngIf="isAuthenticated$ | async; else notLoggedIn">
       <span class="status-text">Logged In</span>
 
-      <!-- Admin-only buttons -->
       <ng-container *ngIf="authService.isAdmin$ | async">
         <button class="auth-button" routerLink="/user">User Details</button>
         <button class="auth-button" routerLink="/manage-houses">Manage Houses</button>
@@ -22,7 +20,5 @@
     <ng-template #notLoggedIn>
       <button class="auth-button" routerLink="/login">Login</button>
     </ng-template>
-    
-    
   </div>
 </nav>

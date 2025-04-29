@@ -99,6 +99,16 @@
       "availableUnits": 6,
       "wifi": true,
       "laundry": true
+    },
+    {
+      "id": null,
+      "name": "Warm Beds Housing sale",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "photo": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "availableUnits": 2,
+      "wifi": true,
+      "laundry": true
     }
   ],
   "applications": [

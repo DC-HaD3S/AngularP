@@ -36,6 +36,33 @@ export class HousingService {
     );
   }
 
+  async createHouse(house: HousingLocation): Promise<void> {
+    await firstValueFrom(
+      this.http.post<void>(`${this.apiUrl}/housingLocations`, house)
+        .pipe(
+          catchError(this.handleError)
+        )
+    );
+  }
+
+  async updateHouse(house: HousingLocation): Promise<void> {
+    await firstValueFrom(
+      this.http.put<void>(`${this.apiUrl}/housingLocations/${house.id}`, house)
+        .pipe(
+          catchError(this.handleError)
+        )
+    );
+  }
+
+  async deleteHouse(id: number): Promise<void> {
+    await firstValueFrom(
+      this.http.delete<void>(`${this.apiUrl}/housingLocations/${id}`)
+        .pipe(
+          catchError(this.handleError)
+        )
+    );
+  }
+
   async submitApplication(
     firstName: string,
     lastName: string,

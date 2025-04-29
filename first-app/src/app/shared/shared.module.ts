@@ -8,7 +8,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { HighlightDirective } from './directives/highlight.directive';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
-
+import { MaterialModule } from '../material.module';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -25,6 +25,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
   ],
   exports: [
     CommonModule,
+    MaterialModule,
     RouterModule,
     ReactiveFormsModule,
     HeaderComponent,

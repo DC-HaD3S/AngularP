@@ -1,4 +1,106 @@
-<div>
-    <h2>Manage Houses</h2>
-    <p>CRUD operations will be implemented here.</p>
+<div class="manage-houses-container">
+  <h2>Manage Houses</h2>
+  
+  <div *ngIf="errorMessage" class="error-message mat-elevation-z2">
+    {{ errorMessage }}
   </div>
+
+  <div class="toolbar">
+    <mat-form-field appearance="fill" class="search-field">
+      <mat-label>Search by Name</mat-label>
+      <input matInput [formControl]="searchControl" (input)="filterHouses()" placeholder="Enter house name">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="openHouseDialog()">Add New House</button>
+  </div>
+
+  <table mat-table [dataSource]="filteredHouses" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let house"> {{ house.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> City </th>
+      <td mat-cell *matCellDef="let house"> {{ house.city }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef> State </th>
+      <td mat-cell *matCellDef="let house"> {{ house.state }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="availableUnits">
+      <th mat-header-cell *matHeaderCellDef> Available Units </th>
+      <td mat-cell *matCellDef="let house"> {{ house.availableUnits }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let house">
+        <button mat-icon-button color="primary" (click)="openHouseDialog(house)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteHouse(house.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #houseDialog>
+  <h2 mat-dialog-title>{{ house ? 'Edit House' : 'Add New House' }}</h2>
+  <mat-dialog-content>
+    <form [formGroup]="houseForm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="houseForm.get('name')?.invalid && houseForm.get('name')?.touched">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="houseForm.get('city')?.invalid && houseForm.get('city')?.touched">
+          City is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state">
+        <mat-error *ngIf="houseForm.get('state')?.invalid && houseForm.get('state')?.touched">
+          State is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Photo URL</mat-label>
+        <input matInput formControlName="photo">
+        <mat-error *ngIf="houseForm.get('photo')?.invalid && houseForm.get('photo')?.touched">
+          Valid URL is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Available Units</mat-label>
+        <input matInput type="number" formControlName="availableUnits">
+        <mat-error *ngIf="houseForm.get('availableUnits')?.invalid && houseForm.get('availableUnits')?.touched">
+          Valid number is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="wifi">WiFi Available</mat-checkbox>
+      <mat-checkbox formControlName="laundry">Laundry Available</mat-checkbox>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="houseForm.invalid" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</ng-template>

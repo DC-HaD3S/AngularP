@@ -20,6 +20,14 @@ export class AuthService {
       console.log('Admin logged in');
       return true;
     }
+    else if (email === 'user@123.com' && password === 'user123') {
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('isAdmin', 'false');
+      this.isAuthenticatedSubject.next(true);
+      this.isAdminSubject.next(false);
+      console.log('Admin logged in');
+      return true;
+    }
     else{
       return false;
     }

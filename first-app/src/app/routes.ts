@@ -17,16 +17,16 @@ const routeConfig: Routes = [
     title: 'Home page'
   },
   {
-    path:'login',
+    path: 'login',
     component: LoginComponent,
     title: 'Login Page'
   },
   {
     path: 'user',
     component: UserComponent,
-    title: 'User page'
+    title: 'User page',
+    canActivate: [AuthGuard]
   },
-
   {
     path: 'details/:id',
     component: DetailsComponent,
