@@ -33,6 +33,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MaterialModule } from './material.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { authReducer } from './core/store/auth/auth.reducer';
+import { AuthEffects } from './core/store/auth/auth.effects';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +58,9 @@ import { MaterialModule } from './material.module';
     
   ],
   imports: [
+    StoreModule.forRoot({ auth: authReducer }),
+        EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     MatTableModule,
     MatDialogModule,
     MaterialModule,
@@ -73,6 +84,7 @@ import { MaterialModule } from './material.module';
     RouterModule.forRoot(routeConfig),
     SharedModule,
     CoreModule
+    
   ],
   bootstrap: [AppComponent]
 })

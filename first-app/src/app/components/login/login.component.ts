@@ -1,37 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/service/auth.service';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../../core/store/auth/auth.state';
+import { login } from '../../core/store/auth/auth.actions';
+import { selectError } from '../../core/store/auth/auth.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  loginError = '';
+export class LoginComponent {
+  loginForm: FormGroup;
+  error$: Observable<string | null>;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder, private store: Store<{ auth: AuthState }>) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    this.error$ = this.store.select(selectError);
   }
 
-  onLogin(): void {
-    const { email, password } = this.loginForm.value;
-    if (this.authService.login(email, password)) {
-      this.loginError = '';
-      this.router.navigate(['/']);
-    } else {
-      this.loginError = 'Invalid email or password';
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.store.dispatch(login({ email, password }));
     }
   }
 }

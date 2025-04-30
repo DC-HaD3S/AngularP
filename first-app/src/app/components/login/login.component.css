@@ -1,27 +1,44 @@
+.forf {
+  height: 73vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
 .login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 24px;
-    border-radius: 8px;
-    background: #ffffff;
-  }
-  
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  .forf{
-    height: 73vh;
-  }
+  width: 400px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #333;
+}
+
+button {
+  align-self: center;
+  padding: 8px 16px;
+}

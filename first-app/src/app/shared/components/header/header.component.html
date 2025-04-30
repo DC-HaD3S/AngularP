@@ -10,7 +10,7 @@
     <ng-container *ngIf="isAuthenticated$ | async; else notLoggedIn">
       <span class="status-text">Logged In</span>
 
-      <ng-container *ngIf="authService.isAdmin$ | async">
+      <ng-container *ngIf="isAdmin$ | async">
         <button class="auth-button" routerLink="/user">User Details</button>
         <button class="auth-button" routerLink="/manage-houses">Manage Houses</button>
       </ng-container>

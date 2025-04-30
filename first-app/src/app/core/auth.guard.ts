@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './service/auth.service';
-import { map, Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { AuthState } from './store/auth/auth.state';
+import { selectIsAdmin } from './store/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard {
-  constructor(private authService: AuthService, private router: Router) {}
+export class AuthGuard implements CanActivate {
+  constructor(private store: Store<{ auth: AuthState }>, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    return this.authService.isAdmin$.pipe(
+    return this.store.select(selectIsAdmin).pipe(
+      take(1),
       map(isAdmin => {
         if (isAdmin) {
           return true;

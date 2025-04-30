@@ -82,7 +82,7 @@ export class HousingService {
     email: string,
     phone: string,
     address: string,
-    city: string, 
+    city: string,
     occupation: string,
     monthlyIncome: string,
     moveInDate: string,
@@ -100,9 +100,17 @@ export class HousingService {
       monthlyIncome,
       moveInDate,
       pincode,
-      housingLocationId: housingLocationId != null ? Number(housingLocationId) : undefined, // Ensure number
+      housingLocationId, 
       createdAt: new Date().toISOString()
     };
+  
+    await firstValueFrom(
+      this.http.post<void>(`${this.apiUrl}/applications`, application)
+        .pipe(
+          catchError(this.handleError)
+        )
+    );
+  
 
     await firstValueFrom(
       this.http.post<void>(`${this.apiUrl}/applications`, application)

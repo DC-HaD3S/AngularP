@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { AuthService } from './core/service/auth.service';
+import { Store } from '@ngrx/store';
+import { AuthState } from './core/store/auth/auth.state';
+import { autoLogin } from './core/store/auth/auth.actions';
 
 @Component({
   selector: 'app-root',
-  templateUrl:'./app.component.html' ,
-  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'homes';
-  constructor(private authService: AuthService) {
-    this.authService.autoLogin(); // 🔁 Auto restore login state on reload
-  }
 
+  constructor(private store: Store<{ auth: AuthState }>) {
+    this.store.dispatch(autoLogin());
+  }
 }

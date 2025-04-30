@@ -109,6 +109,16 @@
       "availableUnits": 2,
       "wifi": true,
       "laundry": true
+    },
+    {
+      "id": 0,
+      "name": "Goregaon 3 bhk",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "photo": "https://usvintagewood.com/wp-content/uploads/2021/05/image1.jpg",
+      "availableUnits": 2,
+      "wifi": true,
+      "laundry": false
     }
   ],
   "applications": [

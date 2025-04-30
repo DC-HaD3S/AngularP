@@ -21,12 +21,19 @@ const routeConfig: Routes = [
     component: LoginComponent,
     title: 'Login Page'
   },
-  {
-    path: 'user',
-    component: UserComponent,
-    title: 'User page',
-    canActivate: [AuthGuard]
-  },
+
+    {
+      path: 'manage-houses',
+      component: ManageHousesComponent,
+      title: 'Manage Houses',
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'user',
+      component: UserComponent,
+      title: 'User page',
+      canActivate: [AuthGuard]
+    },
   {
     path: 'details/:id',
     component: DetailsComponent,
@@ -51,12 +58,6 @@ const routeConfig: Routes = [
     path: 'terms-and-conditions', 
     component: TermsAndConditionsComponent, 
     title: 'Terms & Conditions' 
-  },
-  { 
-    path: 'manage-houses', 
-    component: ManageHousesComponent, 
-    title: 'Manage Houses', 
-    canActivate: [AuthGuard] 
   }
 ];
 

@@ -83,7 +83,7 @@ export class DetailsComponent implements AfterViewInit {
         this.applyForm.value.monthlyIncome ?? '',
         this.applyForm.value.moveInDate ?? '',
         this.applyForm.value.pincode ?? '',
-        this.housingLocation?.id != null ? Number(this.housingLocation.id) : undefined // Convert to number
+        this.housingLocation?.id != null ? Number(this.housingLocation.id) : undefined 
       ).then(
         () => {
           this.applyForm.reset();
