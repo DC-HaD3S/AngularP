@@ -70,8 +70,8 @@ export class DetailsComponent implements AfterViewInit {
 
   submitApplication() {
     if (this.applyForm.valid) {
-      this.successMessage = null; // Clear previous success message
-      this.errorMessage = null; // Clear previous error message
+      this.successMessage = null;
+      this.errorMessage = null;
       this.housingService.submitApplication(
         this.applyForm.value.firstName ?? '',
         this.applyForm.value.lastName ?? '',
@@ -83,12 +83,12 @@ export class DetailsComponent implements AfterViewInit {
         this.applyForm.value.monthlyIncome ?? '',
         this.applyForm.value.moveInDate ?? '',
         this.applyForm.value.pincode ?? '',
-        this.housingLocation?.id
+        this.housingLocation?.id != null ? Number(this.housingLocation.id) : undefined // Convert to number
       ).then(
         () => {
           this.applyForm.reset();
-          this.pincodes = []; // Clear pincodes
-          this.successMessage = 'Successfully submitted application!'; // Set success message
+          this.pincodes = [];
+          this.successMessage = 'Successfully submitted application!';
         },
         error => {
           this.errorMessage = 'Failed to submit application. Please try again.';

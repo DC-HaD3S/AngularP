@@ -16,4 +16,7 @@ h2 {
   text-align: center;
   margin: 20px 0;
 }
+div{
+  height: 70vh !important;
+}
 

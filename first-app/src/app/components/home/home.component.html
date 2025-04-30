@@ -5,8 +5,8 @@
 </form>
 <div class="results">
   <app-card
-    *ngFor="let housingLocation of filteredLocationList"
-    [data]="housingLocation"
-    [cardConfig]="cardConfig(housingLocation.id.toString())">
-  </app-card>
+  *ngFor="let housingLocation of filteredLocationList"
+  [data]="housingLocation"
+  [cardConfig]="housingLocation.id != null ? cardConfig(housingLocation.id.toString()) : cardConfig('')">
+</app-card>
 </div>

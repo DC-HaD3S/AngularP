@@ -17,7 +17,12 @@ export class HousingService {
     return firstValueFrom(
       this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations`)
         .pipe(
-          map(locations => locations ?? []),
+          map(locations => 
+            (locations ?? []).map(location => ({
+              ...location,
+              id: Number(location.id) // Convert id to number
+            }))
+          ),
           catchError((error: HttpErrorResponse) => {
             this.handleError(error);
             return of([]);
@@ -30,7 +35,9 @@ export class HousingService {
     return firstValueFrom(
       this.http.get<HousingLocation[]>(`${this.apiUrl}/housingLocations?id=${id}`)
         .pipe(
-          map(locations => locations[0]),
+          map(locations => 
+            locations[0] ? { ...locations[0], id: Number(locations[0].id) } : undefined // Convert id to number
+          ),
           catchError(this.handleError)
         )
     );
@@ -38,7 +45,10 @@ export class HousingService {
 
   async createHouse(house: HousingLocation): Promise<void> {
     await firstValueFrom(
-      this.http.post<void>(`${this.apiUrl}/housingLocations`, house)
+      this.http.post<void>(`${this.apiUrl}/housingLocations`, {
+        ...house,
+        id: Number(house.id) // Ensure id is number
+      })
         .pipe(
           catchError(this.handleError)
         )
@@ -47,7 +57,10 @@ export class HousingService {
 
   async updateHouse(house: HousingLocation): Promise<void> {
     await firstValueFrom(
-      this.http.put<void>(`${this.apiUrl}/housingLocations/${house.id}`, house)
+      this.http.put<void>(`${this.apiUrl}/housingLocations/${house.id}`, {
+        ...house,
+        id: Number(house.id) // Ensure id is number
+      })
         .pipe(
           catchError(this.handleError)
         )
@@ -69,7 +82,7 @@ export class HousingService {
     email: string,
     phone: string,
     address: string,
-    city: string,
+    city: string, 
     occupation: string,
     monthlyIncome: string,
     moveInDate: string,
@@ -87,7 +100,7 @@ export class HousingService {
       monthlyIncome,
       moveInDate,
       pincode,
-      housingLocationId,
+      housingLocationId: housingLocationId != null ? Number(housingLocationId) : undefined, // Ensure number
       createdAt: new Date().toISOString()
     };
 
@@ -103,7 +116,7 @@ export class HousingService {
     return firstValueFrom(
       this.http.get<Application[]>(`${this.apiUrl}/applications`)
         .pipe(
-          map(applications => applications ?? []),
+          map(applications => (applications ?? [])),
           catchError((error: HttpErrorResponse) => {
             this.handleError(error);
             return of([]);

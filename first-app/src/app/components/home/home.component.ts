@@ -13,12 +13,12 @@ export class HomeComponent {
   filteredLocationList: HousingLocation[] = [];
   errorMessage: string | null = null;
 
-  cardConfig = (id: string) => ({
+  cardConfig = (id: string | null | undefined) => ({
     fields: {},
     titleField: 'name',
     subtitleField: 'city',
     imageField: 'photo',
-    button: { label: 'Learn More', link: ['/details', id] }
+    button: { label: 'Learn More', link: ['/details', id ?? ''] }
   });
 
   constructor() {
