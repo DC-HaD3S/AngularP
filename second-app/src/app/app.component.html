@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Learning App</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">E-Learning Platform</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/courses" routerLinkActive="active">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user-types" routerLinkActive="active">User Types</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/course-categories" routerLinkActive="active">Categories</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="bg-dark text-white py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>E-Learning Platform</h5>
+          <p>Empowering education through technology.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a routerLink="/home" class="text-white">Home</a></li>
+            <li><a routerLink="/courses" class="text-white">Courses</a></li>
+            <li><a routerLink="/users" class="text-white">Users</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <p>© 2025 E-Learning Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<div class="home-container">
+  <h1 *ngIf="isAdmin$ | async">Admin Dashboard</h1>
+  <h1 *ngIf="!(isAdmin$ | async)">User Dashboard</h1>
+  <app-course-list></app-course-list>
+</div>

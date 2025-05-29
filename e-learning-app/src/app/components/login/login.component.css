@@ -1,0 +1,86 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.login-container {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  box-shadow: 10px 10px 8px #888888;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  height: 400px; /* Fixed height for the card */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+mat-card-header {
+  text-align: center;
+  display: block;
+  margin-bottom: 16px;
+}
+
+mat-card-content {
+  padding: 0 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space between form and error */
+}
+
+.login-form {
+  flex-grow: 0; /* Prevent the form from expanding */
+}
+
+.error-container {
+  min-height: 40px; /* Reserve fixed space for the error message */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 0.875em;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 16px;
+  word-wrap: break-word;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  margin: 0; /* Remove default margin to fit in reserved space */
+}
+
+button[mat-raised-button] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button[mat-raised-button]:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+button[mat-raised-button][disabled] {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}

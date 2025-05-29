@@ -1,0 +1,25 @@
+.details-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  text-align: center;
+  padding: 12px;
+}
+
+mat-card-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+mat-card-content {
+  padding: 12px;
+}
+
+mat-card-content p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 0.9rem;
+}

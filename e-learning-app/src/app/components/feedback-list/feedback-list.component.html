@@ -1,0 +1,13 @@
+<div class="feedback-list-container">
+  <h2>Feedback List</h2>
+  <div *ngFor="let feedback of feedbacks" class="feedback-item">
+    <app-details-card
+      [title]="'Feedback #' + feedback.id"
+      [details]="[
+        'Course ID: ' + feedback.courseId,
+        'Rating: ' + feedback.rating + '/5',
+        'Comments: ' + feedback.comments
+      ]">
+    </app-details-card>
+  </div>
+</div>

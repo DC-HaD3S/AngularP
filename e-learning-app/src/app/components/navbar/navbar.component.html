@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <span>E-Learning Platform</span>
+  <span class="spacer"></span>
+  <div *ngIf="role$ | async as role">
+    <button mat-button *ngIf="role === 'admin'" [routerLink]="['/admin/home']">Home</button>
+    <button mat-button *ngIf="role === 'admin'" [routerLink]="['/admin/feedbacks']">Feedbacks</button>
+    <button mat-button *ngIf="role === 'admin'" [routerLink]="['/admin/instructors']">Instructors</button>
+    <button mat-button *ngIf="role === 'admin'" [routerLink]="['/admin/enrolled']">Enrolled</button>
+    <button mat-button *ngIf="role === 'admin'" [routerLink]="['/admin/manage-houses']">Manage Houses</button>
+
+    <button mat-button *ngIf="role === 'user'" [routerLink]="['/user/home']">Home</button>
+    <button mat-button *ngIf="role === 'user'" [routerLink]="['/user/apply-instructor']">Apply as Instructor</button>
+    <button mat-button *ngIf="role === 'user'" [routerLink]="['/user/feedback']">Submit Feedback</button>
+    <button mat-button *ngIf="role === 'user'" [routerLink]="['/user/enrolled']">Enrolled Courses</button>
+    
+    <button mat-button [matMenuTriggerFor]="userMenu" class="username-button">
+      {{ role }}
+    </button>
+    <mat-menu #userMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
