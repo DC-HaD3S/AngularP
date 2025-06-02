@@ -1,5 +1,5 @@
 /* Main container */
-.login-container {
+.signup-container {
   padding: 16px;
   display: flex;
   justify-content: center;
@@ -45,38 +45,24 @@ mat-card-header .text-muted {
   margin: 0 auto;
 }
 
-/* Form styling - UPDATED SPACING */
-.login-form {
+/* Form styling */
+.signup-form {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Reduced gap */
-  margin-bottom: 8px; /* Reduced margin */
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
 mat-form-field {
   width: 100%;
 }
 
-/* Forgot password link - UPDATED SPACING */
-.forgot-password {
-  text-align: right;
-  margin: -25px 0 4px 0; /* Pulls up closer to password field */
-}
-
-.forgot-link {
-  color: #6c757d;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.forgot-link:hover {
-  text-decoration: underline;
-}
-
-/* Buttons - UPDATED SPACING */
+/* Buttons */
 mat-card-actions {
   padding: 0;
-  margin: 6px 0; /* Reduced from 8px */
+  margin: 6px 0;
+  display: flex;
+  gap: 8px; /* Space between Sign Up and Cancel buttons */
 }
 
 button[mat-raised-button] {
@@ -92,6 +78,18 @@ button[mat-raised-button]:hover:not(:disabled) {
   background-color: #0056b3;
 }
 
+button[mat-button] {
+  width: 100%;
+  padding: 10px;
+  color: #6c757d;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button[mat-button]:hover {
+  background-color: #f5f5f5;
+}
+
 /* Error message */
 .error-container {
   margin: 16px 0;
@@ -104,23 +102,6 @@ button[mat-raised-button]:hover:not(:disabled) {
   padding: 8px 16px;
   background-color: #f8d7da;
   border-radius: 4px;
-}
-
-/* Signup prompt */
-.signup-prompt {
-  text-align: center;
-  margin-top: 16px;
-  font-size: 14px;
-  color: #6c757d;
-}
-
-.signup-link {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.signup-link:hover {
-  text-decoration: underline;
 }
 
 /* Spinner */

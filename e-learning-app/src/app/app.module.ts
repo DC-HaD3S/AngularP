@@ -1,54 +1,60 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { courseReducer } from './state/course.reducer';
+import { HttpClientModule } from '@angular/common/http';
 import { authReducer } from './state/auth.reducer';
+import { courseReducer } from './state/course.reducer';
 import { CourseEffects } from './state/course.effects';
-import { EnrolledUsersComponent } from './components/enrolled-users/enrolled-users.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { HomeComponent } from './components/home/home.component';
 import { EnrolledCoursesComponent } from './components/enrolled-courses/enrolled-courses.component';
-import { ManageCoursesComponent } from './components/manage-courses/manage-courses.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     NavbarComponent,
-    EnrolledUsersComponent,
-    EnrolledCoursesComponent,
-    ManageCoursesComponent
+    LoginComponent,
+    SignupComponent,
+    ForgotPasswordComponent,
+    EnrolledCoursesComponent
   ],
   imports: [
     BrowserModule,
-    MatMenuModule,
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatMenuModule,
+    MatDialogModule,
     MatCardModule,
-    MatInputModule,
     MatFormFieldModule,
-    StoreModule.forRoot({ courses: courseReducer, auth: authReducer }),
-    EffectsModule.forRoot([CourseEffects, ]),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    HttpClientModule,
+    StoreModule.forRoot({
+      auth: authReducer,
+      courses: courseReducer
+    }),
+    EffectsModule.forRoot([CourseEffects])
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
