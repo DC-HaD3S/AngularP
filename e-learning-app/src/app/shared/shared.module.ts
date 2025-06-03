@@ -9,15 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsCardComponent } from './details-card/details-card.component';
-import { HomeComponent } from '../components/home/home.component';
-import { CourseListComponent } from '../components/course-list/course-list.component';
 import { CourseApplyDialogComponent } from '../components/course-apply-dialog/course-apply-dialog.component';
 
 @NgModule({
   declarations: [
     DetailsCardComponent,
-    HomeComponent,
-    CourseListComponent,
     CourseApplyDialogComponent
   ],
   imports: [
@@ -34,8 +30,7 @@ import { CourseApplyDialogComponent } from '../components/course-apply-dialog/co
   ],
   exports: [
     DetailsCardComponent,
-    HomeComponent,
-    CourseListComponent,
+    
     CourseApplyDialogComponent
   ]
 })

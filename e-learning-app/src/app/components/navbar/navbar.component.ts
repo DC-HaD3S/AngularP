@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserRole } from '../../enums/user-role.enum';
 import { clearRole } from '../../state/auth.actions';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { AppState } from '../../state/app.state';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +20,7 @@ export class NavbarComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
-    private store: Store<{ auth: { role: UserRole | null } }>
+    private store: Store<AppState>
   ) {
     this.role$ = this.store.select(state => state.auth.role);
   }
@@ -31,21 +32,58 @@ export class NavbarComponent implements AfterViewInit {
     if (!this.triggerButton) {
       console.warn('Trigger button is not available');
     }
-
-    this.menuTrigger.menuOpened.subscribe(() => this.adjustMenuWidth());
+    this.menuTrigger?.menuOpened.subscribe(() => this.adjustMenuWidth());
   }
 
-  logout(): void {
-    this.store.dispatch(clearRole());
-    localStorage.removeItem('role');
+  goToLogin(): void {
     this.router.navigate(['/login']);
   }
 
+  goToAdminHome(): void {
+    this.router.navigate(['/admin/home']);
+  }
+
+  goToAdminFeedbacks(): void {
+    this.router.navigate(['/admin/feedbacks']);
+  }
+
+  goToAdminInstructors(): void {
+    this.router.navigate(['/admin/instructors']);
+  }
+
+  goToAdminEnrolled(): void {
+    this.router.navigate(['/admin/enrolled']);
+  }
+
+  goToAdminManageCourses(): void {
+    this.router.navigate(['/admin/manage-houses']);
+  }
+
+  goToUserHome(): void {
+    this.router.navigate(['/user/home']);
+  }
+
+  goToUserApplyInstructor(): void {
+    this.router.navigate(['/user/apply-instructor']);
+  }
+
+  goToUserFeedback(): void {
+    this.router.navigate(['/user/feedback']);
+  }
+
+  goToUserEnrolled(): void {
+    this.router.navigate(['/user/enrolled']);
+  }
+
+logout(): void {
+  this.store.dispatch(clearRole());
+  localStorage.removeItem('role');
+  this.router.navigate(['/login']);
+}
+
   adjustMenuWidth(): void {
     const buttonWidth = this.triggerButton?.nativeElement?.offsetWidth;
-
     const menuPanelEl = (this.menuTrigger as any)._overlayRef?.overlayElement;
-
     if (buttonWidth && menuPanelEl) {
       menuPanelEl.style.width = `${buttonWidth}px`;
     } else {

@@ -1,32 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UserRole } from './enums/user-role.enum';
 import { setRole } from './state/auth.actions';
+import { UserRole } from './enums/user-role.enum';
+
+interface AppState {
+  auth: {
+    role: string | null;
+  };
+}
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: 'app.component.html',
+  styles: []
 })
 export class AppComponent implements OnInit {
-  role$: Observable<UserRole | null>;
+  role$: Observable<string | null>;
 
   constructor(
-    private store: Store<{ auth: { role: UserRole | null } }>,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {
     this.role$ = this.store.select(state => state.auth.role);
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        console.log('Navigating to:', event.url);
+      }
+    });
+
+    const storedRole = localStorage.getItem('role');
+    if (storedRole) {
+      this.store.dispatch(setRole({ role: storedRole as UserRole }));
+      this.router.navigate([`/${storedRole.toLowerCase()}/home`]);
+    }
   }
 
   ngOnInit(): void {
-    const savedRole = localStorage.getItem('role') as UserRole | null;
-    if (savedRole) {
-      this.store.dispatch(setRole({ role: savedRole }));
-      this.router.navigate([`/${savedRole.toLowerCase()}/home`]);
-    } else {
-      this.router.navigate(['/login']);
-    }
+    console.log('AppComponent initialized');
+    this.role$.subscribe((role: string | null) => {
+      if (!role && !localStorage.getItem('role')) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 }

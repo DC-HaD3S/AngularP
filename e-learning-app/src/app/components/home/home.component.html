@@ -1,5 +1,10 @@
 <div class="home-container">
-  <h1 *ngIf="isAdmin$ | async">Admin Dashboard</h1>
-  <h1 *ngIf="!(isAdmin$ | async)">User Dashboard</h1>
+  <div *ngIf="role$ | async as role">
+    <h1 *ngIf="role === 'admin'">Admin Dashboard</h1>
+    <h1 *ngIf="role === 'user'">User Dashboard</h1>
+  </div>
+  <div *ngIf="!(role$ | async)">
+    <h1>Welcome to the E-Learning Platform</h1>
+  </div>
   <app-course-list></app-course-list>
 </div>

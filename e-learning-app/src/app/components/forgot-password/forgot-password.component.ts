@@ -17,18 +17,21 @@ export class ForgotPasswordComponent {
   newPassword: string = '';
   error: string = '';
   loading: boolean = false;
-  generatedOtp: string = '123456'; // Simulated OTP for demo purposes
+  generatedOtp: string = ''; 
 
   constructor(
     private http: HttpClient,
     private dialogRef: MatDialogRef<ForgotPasswordComponent>
   ) {}
 
+  private generateOtp(): string {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
+
   onNextStep1(): void {
     this.error = '';
     this.loading = true;
 
-    // Check if the username and email match a user in db.json
     this.http.get<any[]>(`http://localhost:8000/users?username=${this.username}&email=${this.email}`)
       .pipe(
         catchError(() => {
@@ -40,7 +43,7 @@ export class ForgotPasswordComponent {
       .subscribe(users => {
         this.loading = false;
         if (users.length > 0) {
-          // Simulate sending OTP (in a real app, you'd send an email)
+          this.generatedOtp = this.generateOtp();
           console.log('Simulated OTP sent:', this.generatedOtp);
           this.step = 2;
         } else {
@@ -66,7 +69,6 @@ export class ForgotPasswordComponent {
     this.error = '';
     this.loading = true;
 
-    // Find the user and update their password
     this.http.get<any[]>(`http://localhost:8000/users?username=${this.username}`)
       .pipe(
         switchMap(users => {
