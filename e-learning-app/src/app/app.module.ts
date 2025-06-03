@@ -26,6 +26,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { AuthGuard } from './guards/auth.guards';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CourseDetailsDialogComponent } from './components/course-details-dialog/course-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SignupComponent,
     ForgotPasswordComponent,
     HomeComponent,
-    CourseListComponent
+    CourseListComponent,
+    
+    CourseDetailsDialogComponent
   ],
   imports: [
     BrowserModule,

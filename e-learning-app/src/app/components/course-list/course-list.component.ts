@@ -9,6 +9,7 @@ import { loadCourses } from 'src/app/state/course.actions';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { CourseDetailsDialogComponent } from '../course-details-dialog/course-details-dialog.component';
 
 @Component({
   selector: 'app-course-list',
@@ -61,6 +62,21 @@ ngOnInit(): void {
       }
     });
   }
+
+
+openDetailsDialog(course: any): void {
+  const dialogRef = this.dialog.open(CourseDetailsDialogComponent, {
+    width: '600px',
+    maxWidth: '90vw',
+    data: course
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === 'apply') {
+      this.openApplyDialog(course);
+    }
+  });
+}
 
   viewEnrolledUsers(courseId: number): void {
     this.snackBar.open(`Viewing enrolled users for course ID: ${courseId}`, 'Close', {
