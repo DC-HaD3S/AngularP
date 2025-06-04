@@ -26,9 +26,11 @@ export class CourseApplyDialogComponent {
       confirmation: [false, Validators.requiredTrue]
     });
   }
-    openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action);
-  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+        duration: 3000 
+    });
+}
   onSubmit(): void { 
     if (this.applyForm.valid) {
       this.courseService.enrollUser(this.data.course.id, 1).subscribe(success => {

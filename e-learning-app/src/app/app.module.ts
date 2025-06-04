@@ -27,6 +27,7 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 import { AuthGuard } from './guards/auth.guards';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CourseDetailsDialogComponent } from './components/course-details-dialog/course-details-dialog.component';
+import { RegisteredUsersComponent } from './components/registered-users/registered-users.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CourseDetailsDialogComponent } from './components/course-details-dialog
     HomeComponent,
     CourseListComponent,
     
-    CourseDetailsDialogComponent
+    CourseDetailsDialogComponent,
+         RegisteredUsersComponent
   ],
   imports: [
     BrowserModule,
