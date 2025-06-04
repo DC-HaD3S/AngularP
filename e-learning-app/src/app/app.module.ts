@@ -39,8 +39,8 @@ import { RegisteredUsersComponent } from './components/registered-users/register
     HomeComponent,
     CourseListComponent,
     
+    
     CourseDetailsDialogComponent,
-         RegisteredUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +48,7 @@ import { RegisteredUsersComponent } from './components/registered-users/register
     MatSnackBarModule,
     BrowserAnimationsModule,
     FormsModule, 
+    
     HttpClientModule,
     MatToolbarModule,
     MatButtonModule,

@@ -59,9 +59,7 @@ export class NavbarComponent implements AfterViewInit {
     this.router.navigate(['/admin/manage-houses']);
   }
 
-  goToUserHome(): void {
-    this.router.navigate(['/user/home']);
-  }
+
 
   goToUserApplyInstructor(): void {
     this.router.navigate(['/user/apply-instructor']);
@@ -70,7 +68,9 @@ export class NavbarComponent implements AfterViewInit {
   goToUserFeedback(): void {
     this.router.navigate(['/user/feedback']);
   }
-
+  goToRegisteredUsers(): void { 
+    this.router.navigate(['/admin/registered-users']);
+  }
   goToUserEnrolled(): void {
     this.router.navigate(['/user/enrolled']);
   }

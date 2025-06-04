@@ -6,6 +6,7 @@ import { InstructorListComponent } from '../components/instructor-list/instructo
 import { AuthGuard } from '../guards/auth.guards';
 import { EnrolledUsersComponent } from '../components/enrolled-users/enrolled-users.component';
 import { ManageCoursesComponent } from '../components/manage-courses/manage-courses.component';
+import { RegisteredUsersComponent } from '../components/registered-users/registered-users.component';
 
 const routes: Routes = [
   { 
@@ -17,7 +18,9 @@ const routes: Routes = [
       { path: 'feedbacks', component: FeedbackListComponent },
       { path: 'instructors', component: InstructorListComponent },
       {path : 'manage-houses', component: ManageCoursesComponent},
-      { path: 'enrolled', component: EnrolledUsersComponent }
+      { path: 'enrolled', component: EnrolledUsersComponent },
+      { path: 'registered-users', component: RegisteredUsersComponent }, 
+
     ]
   }
 ];

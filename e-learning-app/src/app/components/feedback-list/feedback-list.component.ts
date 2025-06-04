@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackListComponent implements OnInit {
   feedbacks = [
-    { id: 1, courseId: 1, rating: 4, comments: 'Great course, very informative!' },
-    { id: 2, courseId: 2, rating: 5, comments: 'Loved the JavaScript basics.' }
+    { id: 1,name:'Rohit', coursename: 'Python', rating: 4, comments: 'Great course, very informative!' },
+    { id: 2,name:'Rohit', coursename: 'JavaScript', rating: 5, comments: 'Loved the JavaScript basics.' }
   ]; 
 
   ngOnInit(): void {

@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructorListComponent  {
   instructors = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', qualifications: 'PhD in CS', yearsOfExperience: 5 },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', qualifications: 'MSc in IT', yearsOfExperience: 3 }
+    { id: 1, name: 'Rajendra', email: 'Rajendra@gmail.com', qualifications: 'Bsc in CS', yearsOfExperience: 5 },
+    { id: 1, name: 'Rajendra', email: 'Rajendra@gmail.com', qualifications: 'Bsc in CS', yearsOfExperience: 5 }
   ]; 
 
 
